@@ -147,10 +147,10 @@ def main(args):
         std=[1/0.229, 1/0.224, 1/0.255]
     )
     all_accuracies = []
-    # if args.baseline:
-    #     results_file = open(os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot", args.test_dataset + "_" + str(args.K) + "_baseline.txt"), 'w')
-    # else:
-    #     results_file = open(os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot", args.test_dataset + "_" + str(args.K) + ".txt"), 'w')
+    if args.baseline:
+        results_file = open(os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot", args.test_dataset + "_" + str(args.K) + "_baseline.txt"), 'w')
+    else:
+        results_file = open(os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot", args.test_dataset + "_" + str(args.K) + ".txt"), 'w')
     for i, (batch, _) in tqdm(enumerate(testloader)):
         with torch.no_grad():
             batch = batch.to(device)
@@ -206,9 +206,9 @@ def main(args):
 
     avg = np.mean(all_accuracies)
     std = np.std(all_accuracies) * 1.96 / np.sqrt(len(all_accuracies))
-    # results_file.write("Accuracy, " + str(avg))
-    # results_file.write("\n")
-    # results_file.write("Std, " + str(std))
+    results_file.write("Accuracy, " + str(avg))
+    results_file.write("\n")
+    results_file.write("Std, " + str(std))
     print("Accuracy", avg, std)
 
 

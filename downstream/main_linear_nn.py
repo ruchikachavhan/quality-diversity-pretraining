@@ -8,7 +8,9 @@ import torch.nn as nn
 import torchvision.models as torchvision_models
 from  downstream_utils import load_backbone, get_datasets, get_datasets_ood, dataset_info, dist_acc
 from sklearn.metrics import r2_score
-from pretrain_utils import accuracy, AverageMeter, ProgressMeter
+import sys
+sys.path.append('/raid/s2265822/qd4vision/')
+from supervised.pretrain_utils import accuracy, AverageMeter, ProgressMeter
 from tqdm import tqdm
 from sklearn.preprocessing import minmax_scale
 
@@ -63,7 +65,7 @@ parser.add_argument('--dist-url', default='tcp://224.66.41.62:23456', type=str,
                     help='url used to set up distributed training')
 parser.add_argument('--dist-backend', default='nccl', type=str,
                     help='distributed backend')
-parser.add_argument('--seed', default=None, type=int,
+parser.add_argument('--seed', default=0, type=int,
                     help='seed for initializing training. ')
 parser.add_argument('--gpu', default=4, type=int,
                     help='GPU id to use.')
@@ -90,7 +92,7 @@ parser.add_argument('--image_size', default=224, type=int,
 # QD args
 parser.add_argument('--ensemble_size', default=5, type=int, help='Number of members in the ensemble')
 parser.add_argument('--few-shot-reg', action='store_true',
-                    help='do few shot rgerssion')
+                    help='do few shot regression')
 parser.add_argument('--shot-size', default=0.0, type=float,
                         help='number of samples per classes.')
 parser.add_argument('--moco', default=None, type=str, help="Use MOCO pretrained model or Use supervised pretrained model")
@@ -181,9 +183,9 @@ def main_worker(config=None):
     print("Best score: ", best_score)
 
     if args.baseline:
-        fname = os.path.join("results/results_{}".format(args.ensemble_size), "{}-moco".format(args.moco) if args.moco is not None else "supervised","{}_{}_{}_baseline.json".format("few_shot" if args.few_shot_reg else "many_shot", args.test_dataset, str(args.shot_size)))
+        fname = os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot" if args.few_shot_reg else "",  "{}_{}_{}_baseline.json".format(args.test_dataset, str(args.shot_size) if args.few_shot_reg else "", args.seed))
     else:
-        fname = os.path.join("results/results_{}".format(args.ensemble_size), "{}-moco".format(args.moco) if args.moco is not None else "supervised","{}_{}_{}.json".format("few_shot" if args.few_shot_reg else "many_shot", args.test_dataset, str(args.shot_size)))
+        fname = os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", "few_shot" if args.few_shot_reg else "", "{}_{}_{}.json".format(args.test_dataset, str(args.shot_size) if args.few_shot_reg else "", args.seed))
     
     with open(fname, 'w') as f:
         json.dump(results, f)

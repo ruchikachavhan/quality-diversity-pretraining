@@ -8,8 +8,9 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision.models import resnet50, ResNet50_Weights
 from torchvision.datasets import ImageFolder
-import models
-from pretrain_utils import accuracy
+import sys
+sys.path.append('/raid/s2265822/qd4vision/')
+from supervised import models
 from test_datasets import CelebA, FacesInTheWild300W, LeedsSportsPose, AnimalPose, Causal3DIdent, ALOI, MPII
 from r2score import r2_score
 from ood_datasets import domain_net_datasets, CIFAR_STL_dataset, breeds_dataset
@@ -235,8 +236,6 @@ def get_datasets(args):
                                                                     base_transform,
                                                                     base_transform, args.sample_rate,
                                                                     args.num_samples_per_classes)
-        if args.few_shot_reg:
-            raise NotImplementedError("Low shot regression not implemented for classification dataset. Run few_shot.py instead")
      
     print("Datasets loaded")
     print("Train size: ", len(train_dataset), "Val size: ", len(val_dataset), "Test size: ", len(test_dataset))
@@ -305,7 +304,10 @@ def get_few_shot_reg_datasets(args):
         ])
     dataset = dataset_info[args.test_dataset]['class'](os.path.join(args.data_root, dataset_info[args.test_dataset]['dir'])
                                         ,transform = base_transform)
-    
+    few_shot_size = int(args.shot_size * len(dataset))
+    val_size = int(0.2*(len(dataset) - few_shot_size))
+    test_size = len(dataset) - few_shot_size - val_size    
+    train_dataset, val_dataset, test_dataset = torch.utils.data.random_split(dataset, [few_shot_size, val_size, test_size])
     
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True,
                             num_workers=args.workers)

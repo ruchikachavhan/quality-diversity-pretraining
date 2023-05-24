@@ -15,7 +15,6 @@ from sklearn.linear_model import LogisticRegression as LogReg
 from sklearn.linear_model import Ridge as LinReg
 from sklearn.metrics import confusion_matrix, accuracy_score, r2_score
 from sklearn.preprocessing import minmax_scale
-from sklearn.model_selection import KFold
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.utils._testing import ignore_warnings
 
@@ -84,6 +83,8 @@ parser.add_argument('-sc', '--num-samples-per-classes', default=None, type=int,
 parser.add_argument('--moco', default=None, type=str, help="Use MOCO pretrained model or Use supervised pretrained model")
 parser.add_argument('--model-type', default='branched', type=str, 
                     help='which model type to use')
+parser.add_argument('--few-shot-reg', action='store_true',
+                    help='do few shot regression')
 
 def main():
     main_worker()
@@ -145,7 +146,7 @@ def main_worker(config=None):
         best_params = {}
         best_score = np.zeros(args.ensemble_size + 1)
         all_results = {}
-        results_file = open(os.path.join("results/results_{}".format(args.ensemble_size), "{}-moco".format(args.moco) if args.moco is not None else "supervised", args.test_dataset + "_" + args.model_type + ".json"), 'w')
+        results_file = open(os.path.join("results", "{}-moco".format(args.moco) if args.moco is not None else "supervised", args.test_dataset + ".json"), 'w')
         print("Saving results in ", results_file)
 
         for k in range(0, args.ensemble_size+1):
