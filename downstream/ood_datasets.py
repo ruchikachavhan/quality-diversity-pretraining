@@ -118,30 +118,6 @@ def CIFAR_STL_dataset(image_root):
     num_classes = 10
     return source_train, source_test, target_test, num_classes
 
-# Test the domain net dataset
-# domainnet_info = {'clipart': 0, 'painting': 1, 'real': 2, 'sketch': 3}
-# domainnet = ImageList(image_root='../../TestDatasets/DomainNet', image_list_root='../../TestDatasets/DomainNet', dataset='clipart', 
-#                     domain_label=0, dataset_name='domainnet', split='train', transform=get_train_trasnform(), sample_masks=None, pseudo_labels=None, strong_transform=None, aug_num=0, rand_aug=False, freq=False)
-# dataloader = torch.utils.data.DataLoader(domainnet, batch_size=64, shuffle=True, num_workers=0)
-# for i, data in enumerate(dataloader):
-#     print(data)
-# source_train, source_test, target = domain_net_datasets(image_root='../../TestDatasets/DomainNet')
-# source_train = torch.utils.data.DataLoader(source_train, batch_size=64, shuffle=True, num_workers=0)
-# source_test = torch.utils.data.DataLoader(source_test, batch_size=64, shuffle=True, num_workers=0)
-# target = torch.utils.data.DataLoader(target, batch_size=64, shuffle=True, num_workers=0)
-
-
-# if not (os.path.exists('../../TestDatasets/breeds') and len(os.listdir('../../TestDatasets/breeds'))):
-#     print("Downloading class hierarchy information into `info_dir`")
-#     setup_breeds('../../TestDatasets/breeds')
-# info_dir = '../../TestDatasets/breeds'
-# hier = ClassHierarchy(info_dir)
-
-# level = 3 # Could be any number smaller than max level
-# superclasses = hier.get_nodes_at_level(level)
-# print(f"Superclasses at level {level}:\n")
-# print(", ".join([f"({si}: {hier.HIER_NODE_NAME[s]})" for si, s in enumerate(superclasses)]))
-
 BREEDS_SPLITS_TO_FUNC = {
     'entity13': make_entity13,
     'entity30': make_entity30,
