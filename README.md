@@ -1,5 +1,5 @@
 # quality-diversity-pretraining
-Code for our ICCV 2023 paper - Quality Diversity for Visual Pre-training
+Code for our ICCV 2023 paper - [Quality Diversity for Visual Pre-training](https://openaccess.thecvf.com/content/ICCV2023/papers/Chavhan_Quality_Diversity_for_Visual_Pre-Training_ICCV_2023_paper.pdf)
 
 ## Requirements
 This code base has been tested with the following package versions:
