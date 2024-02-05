@@ -1,9 +1,5 @@
 # quality-diversity-pretraining
-<<<<<<< HEAD
-Code for our ICCV paper paper - Quality Diversity for Visual Pre-training
-=======
 Code for our ICCV 2023 paper - Quality Diversity for Visual Pre-training
->>>>>>> 3b23d3311c3a3c5b9ac0820c5243af108ad47d1a
 
 ## Requirements
 This code base has been tested with the following package versions:
@@ -51,25 +47,26 @@ python train.py --multiprocessing-distributed --rank 0 --world-size 1 --dist-url
 
 ## Downstream training
 
-We evaluate on several downstream datasets including [CIFAR10](https://pytorch.org/vision/stable/datasets.html), [CIFAR100](https://pytorch.org/vision/stable/datasets.html), [Caltech101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/), [DTD](https://www.robots.ox.ac.uk/~vgg/data/dtd/), [Oxford-Flowers](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) [300w](https://ibug.doc.ic.ac.uk/resources/300-W/), [Leeds Sports Pose](https://dbcollection.readthedocs.io/en/latest/datasets/leeds_sports_pose_extended.html), and [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). We download these datasets in ```../TestDatasets/```. Training and test splits have been adopted from the [Transfer Learning Library](https://github.com/thuml/Transfer-Learning-Library/tree/master)
+We evaluate on several downstream datasets including [CIFAR10](https://pytorch.org/vision/stable/datasets.html), [CIFAR100](https://pytorch.org/vision/stable/datasets.html), [Caltech101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/), [DTD](https://www.robots.ox.ac.uk/~vgg/data/dtd/), [Oxford-Flowers](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html), [Stanford Cars](https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset), [FGVC-Aircraft](https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/), [300w](https://ibug.doc.ic.ac.uk/resources/300-W/), [Leeds Sports Pose](https://dbcollection.readthedocs.io/en/latest/datasets/leeds_sports_pose_extended.html), [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html), [Animal Pose](https://openaccess.thecvf.com/content_ICCV_2019/html/Cao_Cross-Domain_Adaptation_for_Animal_Pose_Estimation_ICCV_2019_paper.html), [MPII](http://human-pose.mpi-inf.mpg.de), [ALOI](https://aloi.science.uva.nl), [Causal3D](https://paperswithcode.com/dataset/causal3dident). We download these datasets in ```../TestDatasets/```. Training and test splits have been adopted from the [Transfer Learning Library](https://github.com/thuml/Transfer-Learning-Library/tree/master)
 
-To run downstream experiments for QD models for CIFAR10, CIFAR100, CalTech101, DTD, OxfordFlowers102, StanfordCars, Aircraft, Animal Pose, MPII, ALOI, and Causal 3D run 
+To run downstream experiments for QD models for CIFAR10, CIFAR100, CalTech101, DTD, OxfordFlowers102, StanfordCars, Aircraft, Animal Pose, MPII, ALOI, and Causal 3D run -  
 ```
-python main_linear.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> 
+python main_linear.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> --data_root <path to TestDatasets/>
 ```
 ```dataset_name``` for each dataset can be found in ```downstream_utils.py```
 
 For evaluation on 300w, Leeds Sports Pose and CelebA, run
 ```
-python main_linear_nn.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> 
+python main_linear_nn.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> --data_root <path to TestDatasets/>
 ```
 
 For few-shot evaluation run, 
 ```
-python few_shot.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> 
+python few_shot.py -a <arch> --test_dataset <dataset name> --gpu 0 --pretrained saved_models/<name of checkpoint> --data_root <path to TestDatasets/>
 ```
-```
+
 ```dataset_name``` for each dataset can be found in ```few_shot.py```
+
 
 If you find our work helpful, please cite our paper
 ```
@@ -83,5 +80,3 @@ If you find our work helpful, please cite our paper
 }
 ```
 
-=======
->>>>>>> 3b23d3311c3a3c5b9ac0820c5243af108ad47d1a
