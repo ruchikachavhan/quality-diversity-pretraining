@@ -65,7 +65,7 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
 parser.add_argument('--baseline', action='store_true', help="Use pretrained or QD model")
 parser.add_argument('--test_mode', default='id', type=str, help="Use ID evaluation or OOD evaluation")
 parser.add_argument('--test_dataset', default='CIFAR10', type=str)
-parser.add_argument('--data_root', default='/raid/s2265822/TestDatasets/', type = str)
+parser.add_argument('--data_root', default='', type = str)
 
 # QD args
 parser.add_argument('--ensemble_size', default=5, type=int, help='Number of members in the ensemble')

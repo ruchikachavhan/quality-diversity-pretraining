@@ -80,7 +80,7 @@ parser.add_argument('--warmup-epochs', default=10, type=int, metavar='N',
 # test data args
 parser.add_argument('--test_dataset', default='VOC2007', type=str)
 parser.add_argument('--baseline', action='store_true', help="Use pretrained or QD model")
-parser.add_argument('--data_root', default='/raid/s2265822/TestDatasets/', type = str)
+parser.add_argument('--data_root', default='', type = str)
 parser.add_argument('--test_mode', default='id', type=str, help="Use pretrained or QD model")
 
 # additional configs:

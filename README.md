@@ -1,9 +1,14 @@
 # quality-diversity-pretraining
+<<<<<<< HEAD
 Code for our ICCV paper paper - Quality Diversity for Visual Pre-training
+=======
+Code for our ICCV 2023 paper - Quality Diversity for Visual Pre-training
+>>>>>>> 3b23d3311c3a3c5b9ac0820c5243af108ad47d1a
 
 ## Requirements
 This code base has been tested with the following package versions:
 
+<<<<<<< HEAD
 ```
 python=3.8.13
 torch=1.13.0
@@ -78,3 +83,5 @@ If you find our work helpful, please cite our paper
 }
 ```
 
+=======
+>>>>>>> 3b23d3311c3a3c5b9ac0820c5243af108ad47d1a
