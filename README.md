@@ -4,7 +4,6 @@ Code for our ICCV 2023 paper - [Quality Diversity for Visual Pre-training](https
 ## Requirements
 This code base has been tested with the following package versions:
 
-<<<<<<< HEAD
 ```
 python=3.8.13
 torch=1.13.0
